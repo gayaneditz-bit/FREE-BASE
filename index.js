@@ -24,14 +24,34 @@ const prefix = '.';
 const ownerNumber = ['94704638406']; // ඔයාගේ no එක දාන්න 🙄
 
 async function connectToWhatsApp() {
-    if (!fs.existsSync(__dirname + '/auth_info_baileys/creds.json')) {
+    
+    const authDir = __dirname + '/auth_info_baileys';
+    if (!fs.existsSync(authDir)) {
+        fs.mkdirSync(authDir, { recursive: true });
+    }
+    if (!fs.existsSync(authDir + '/creds.json') || isLikelySessionId(fs.readFileSync(authDir + '/creds.json', 'utf8'))) {
+        await downloadSessionFromMegaAndRestart();
+    }
+
+    function isLikelySessionId(content) {
+        
+        try {
+            JSON.parse(content);
+            return false;
+        } catch {
+            return true;
+        }
+    }
+
+    async function downloadSessionFromMegaAndRestart() {
         if (!config.SESSION_ID) return console.log('Please add your session to SESSION_ID env !!');
-        const sessdata = config.SESSION_ID.replace("UDMODZ-MD=", ""); // ඔයාගේ session ID එකට අනුව හදාගන්න
+        const sessdata = config.SESSION_ID.replace("UDMODZ-MD=", "");
         const filer = File.fromURL(`https://mega.nz/file/${sessdata}`);
         filer.download((err, data) => {
             if (err) throw err;
             fs.writeFile(__dirname + '/auth_info_baileys/creds.json', data, () => {
-                console.log("Session downloaded ✅");
+                console.log("Session downloaded from Mega ✅. Restarting bot...");
+                process.exit(1);
             });
         });
     }
@@ -54,10 +74,7 @@ async function connectToWhatsApp() {
 
     conn.ev.on('connection.update', (update) => {
         const { connection, lastDisconnect, qr: qrCode } = update;
-        if (qrCode) {
-            console.log('QR code received, scan with your phone:');
-            qr.generate(qrCode, { small: true });
-        }
+        // Do not show QR code in terminal
         if (connection === 'close') {
             const shouldReconnect = (lastDisconnect.error instanceof Boom) && lastDisconnect.error.output.statusCode !== DisconnectReason.loggedOut;
             console.log('connection closed due to ', lastDisconnect.error, ', reconnecting ', shouldReconnect);
@@ -69,8 +86,6 @@ async function connectToWhatsApp() {
             console.log('Plugins installed successful ✅');
             console.log('🙃 Starting... ');
             console.log('👆 Running... ');
-            const inviteCode =`I7JniDdAkuWFWvtIHslWNv` // ඔයාගේ group එකේ link එකේ අන්තිම කෑල්ල දාන්න
-           conn.groupAcceptInvite(inviteCode);
            conn.newsletterFollow("120363183696686259@newsletter") // මේ jid එක මාරු කරන්න එපා මැනිකලාහ් 😇. පහල එකට ඔයාගෙ එක දාන්න
            conn.newsletterFollow("120363183696686259@newsletter") // මේකට ඔයාගේ channel jid එක දාන්න
            console.log(" CHANNEL FOLLOW ✅")

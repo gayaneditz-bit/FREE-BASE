@@ -1,4 +1,4 @@
-
+const { cmd } = require('../command');
 cmd({
     pattern: "ping",
     desc: "Replies with Pong!",
