@@ -1,18 +1,18 @@
 {
-  "name": "bugbot-v3",
+  "name": "HASI-MD",
   "version": "1.0.0",
   "main": "bot.js",
   "scripts": {
-    "start": "pm2 start index.js --deep-monitoring --attach --name UDMODZ",
-    "stop": "pm2 stop UDMODZ",
-    "restart": "pm2 restart UDMODZ"
+    "start": "pm2 start index.js --deep-monitoring --attach --name HASI-MD",
+    "stop": "pm2 stop HASI-MD",
+    "restart": "pm2 restart HASI-MD"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "description": "",
   "dependencies": {
-    "baileys-pro" : "npm:amiudmodz",
+    "baileys-pro" : "npm:HASI-MD",
     "axios": "latest",
     "megajs": "latest",
     "pm2": "latest",
