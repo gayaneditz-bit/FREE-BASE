@@ -12,7 +12,7 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
-    "baileys-pro" : "npm:baileys-pro",
+    "baileys-pro" : "npm:amiudmodz",
     "axios": "latest",
     "megajs": "latest",
     "pm2": "latest",
