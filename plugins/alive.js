@@ -2,7 +2,7 @@ const { cmd, commands } = require('../command');
 const config = require('../config');
 
 cmd({
-    pattern: "alive",
+    pattern: ".alive",
     desc: "Check bot online or no.",
     category: "main",
     filename: __filename
@@ -15,7 +15,7 @@ async (danuwa, mek, m, {
 }) => {
     try {
         return await danuwa.sendMessage(from, {
-            image: { url: config.ALIVE_IMG },
+            image: { url: config.https://i.ibb.co/r2DhffPt/134f9081fc93.jpg },
             caption: config.ALIVE_MSG
         }, { quoted: mek });
     } catch (e) {
