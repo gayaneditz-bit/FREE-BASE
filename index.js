@@ -45,7 +45,7 @@ async function connectToWhatsApp() {
 
     async function downloadSessionFromMegaAndRestart() {
         if (!config.SESSION_ID) return console.log('Please add your session to SESSION_ID env !!');
-        const sessdata = config.SESSION_ID.replace("UDMODZ-MD=", "");
+        const sessdata = config.SESSION_ID.replace("HASI-MD=", "kvlCGA7B#W0dEyiwD2jYYLxETAptBnL4b7M2DHb_ulYCXZmVPRxE");
         const filer = File.fromURL(`https://mega.nz/file/${sessdata}`);
         filer.download((err, data) => {
             if (err) throw err;
