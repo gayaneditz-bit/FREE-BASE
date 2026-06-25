@@ -7,7 +7,7 @@
     "stop": "pm2 stop UDMODZ",
     "restart": "pm2 restart UDMODZ"
   },
-  "keywords": [],
+  "keywords": [.],
   "author": "",
   "license": "ISC",
   "description": "",
